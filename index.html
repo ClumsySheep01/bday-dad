@@ -84,9 +84,7 @@ body {
   gap:12px;
 }
 
-.msg-emoji { 
-  font-size:36px; 
-}
+.msg-emoji { font-size:36px; }
 
 .msg-heading {
   font-family:'Pacifico',cursive;
@@ -140,7 +138,7 @@ body {
   75%{transform:rotate(3deg)}
 }
 
-/* Cover */
+/* ── ORIGINAL COVER STYLE ── */
 .cover {
   position:absolute; inset:0;
   background:linear-gradient(145deg,var(--cover1) 0%,var(--cover2) 55%,var(--cover3) 100%);
@@ -162,54 +160,103 @@ body {
   pointer-events:none;
 }
 
+.cover::before {
+  content:''; position:absolute; inset:0;
+  background-image:radial-gradient(circle,rgba(255,255,255,0.18) 2px,transparent 2px);
+  background-size:28px 28px;
+}
+
+.cover::after {
+  content:''; position:absolute; inset:0;
+  border-radius:inherit; 
+  border:3px solid rgba(255,255,255,0.25); 
+  pointer-events:none;
+}
+
 .cover-inner { 
+  position:relative; 
+  z-index:2; 
   text-align:center; 
-  padding:30px; 
+  padding:32px; 
 }
 
 .cover-tag {
-  font-size:13px; 
+  font-size:12px; 
   font-weight:800; 
-  letter-spacing:3px; 
+  letter-spacing:.25em; 
   text-transform:uppercase;
-  color:rgba(255,255,255,0.8);
-  margin-bottom:12px;
+  color:rgba(255,255,255,.75); 
+  margin-bottom:20px;
 }
 
 .cover-hb {
   font-family:'Pacifico',cursive; 
-  font-size:52px; 
+  font-size:54px; 
+  line-height:1.05;
   color:white; 
-  line-height:1;
-  text-shadow:0 4px 8px rgba(0,0,0,0.2);
+  text-shadow:0 3px 0 rgba(0,0,0,0.08),0 0 40px rgba(255,255,255,0.3);
+  margin-bottom:4px;
 }
 
 .cover-dad {
-  font-size:74px;
-  color:var(--accent);
+  font-family:'Pacifico',cursive; 
+  font-size:78px; 
+  line-height:1;
+  color:var(--accent); 
   display:block;
-  text-shadow:0 5px 10px rgba(0,0,0,0.25);
+  text-shadow:0 4px 0 rgba(0,0,0,0.1),0 0 50px rgba(255,218,110,0.5);
+}
+
+.cover-rule {
+  width:100px; 
+  height:3px; 
+  border-radius:2px;
+  background:rgba(255,255,255,0.45); 
+  margin:22px auto 20px;
+}
+
+.cover-sub { 
+  font-size:15px; 
+  font-weight:700; 
+  color:rgba(255,255,255,.7); 
+  letter-spacing:.05em; 
+}
+
+.cover-balloon {
+  position:absolute; 
+  font-size:36px; 
+  pointer-events:none;
+  animation:bob 3s ease-in-out infinite alternate;
+}
+
+.cover-balloon.bl{left:18px;top:20px}
+.cover-balloon.br{right:18px;top:20px;animation-delay:.8s}
+.cover-balloon.ll{left:18px;bottom:40px;animation-delay:.4s}
+.cover-balloon.lr{right:18px;bottom:40px;animation-delay:1.2s}
+
+@keyframes bob { 
+  from{transform:translateY(0)} 
+  to{transform:translateY(-12px)} 
 }
 
 .click-hint {
   position:absolute; 
-  bottom:28px; 
+  bottom:22px; 
+  width:100%; 
+  text-align:center;
   font-size:11px; 
   font-weight:700; 
-  letter-spacing:2px; 
-  color:rgba(255,255,255,0.6);
-  animation:pulse 2.5s infinite;
+  letter-spacing:.18em; 
+  text-transform:uppercase;
+  color:rgba(255,255,255,.5);
+  animation:pulse-hint 2.5s ease-in-out infinite;
 }
 
-@keyframes pulse { 
-  0%,100%{opacity:0.4} 
-  50%{opacity:0.9} 
-}
+@keyframes pulse-hint{0%,100%{opacity:.3}50%{opacity:.8}}
 
 /* Video & Shred */
 #videoReveal, #shredOverlay {
-  position:fixed; inset:0;
-  z-index:999;
+  position:fixed; inset:0; z-index:999;
 }
 
 #videoReveal {
@@ -220,9 +267,7 @@ body {
 }
 
 #videoReveal video {
-  width:100vw; 
-  height:100vh; 
-  object-fit:cover;
+  width:100vw; height:100vh; object-fit:cover;
 }
 
 #shredOverlay {
@@ -231,8 +276,7 @@ body {
 }
 
 .shred-strip {
-  position:absolute;
-  top:0; bottom:0;
+  position:absolute; top:0; bottom:0;
   background:#f0f9ff;
   transform-origin:top center;
   animation:shred-fall var(--dur) cubic-bezier(0.4,0,0.9,0.6) forwards;
@@ -262,7 +306,6 @@ body {
 
     <div class="pages-bg">
       <div class="page active" id="mainPage">
-
         <div class="main-content">
           <div class="msg-emoji">🎂</div>
           <div class="msg-heading">Happy Birthday, Dad! 🎉</div>
@@ -274,7 +317,7 @@ body {
           </div>
 
           <p class="msg-body">
-           Babbo grazie per tutto quello che fai per noi.
+             Babbo grazie per tutto quello che fai per noi.
             Ti vogliamo tantissimo bene!<br><br>
             Speriamo che tu abbia un compleanno fantatsico! :)
           </p>
@@ -286,12 +329,20 @@ body {
       </div>
     </div>
 
+    <!-- Original Cover -->
     <div class="cover" id="cover">
+      <span class="cover-balloon bl">🎈</span>
+      <span class="cover-balloon br">🎈</span>
+      <span class="cover-balloon ll">🎀</span>
+      <span class="cover-balloon lr">✨</span>
+      
       <div class="cover-inner">
         <div class="cover-tag">A special card for</div>
         <div class="cover-hb">Happy Birthday<span class="cover-dad">Dad!</span></div>
+        <div class="cover-rule"></div>
+        <div class="cover-sub">Tap to open 🎁</div>
       </div>
-      <div class="click-hint">Tap to open 🎁</div>
+      <div class="click-hint">click me!</div>
     </div>
 
   </div>
@@ -324,7 +375,7 @@ document.getElementById('cover').addEventListener('click', function(){
   this.classList.add('flipped');
 });
 
-// Trigger shred + video with immediate audio
+// Trigger shred + video
 document.getElementById('nav-shred').addEventListener('click', triggerShred);
 
 function triggerShred(){
@@ -332,25 +383,11 @@ function triggerShred(){
   const reveal = document.getElementById('videoReveal');
   const overlay = document.getElementById('shredOverlay');
 
-  // Show video immediately
   reveal.style.display = 'flex';
-
-  // Try to play with sound right away
   vid.volume = 1;
   vid.muted = false;
-  
-  const playPromise = vid.play();
+  vid.play().catch(() => {});
 
-  if (playPromise !== undefined) {
-    playPromise.catch(() => {
-      // Fallback: try again after user interaction (some browsers are strict)
-      setTimeout(() => {
-        vid.play().catch(err => console.log("Video autoplay prevented:", err));
-      }, 300);
-    });
-  }
-
-  // Start shred effect
   overlay.innerHTML = '';
   overlay.style.display = 'block';
   
@@ -376,7 +413,6 @@ function triggerShred(){
     overlay.appendChild(s);
   }
 
-  // Hide shred after animation
   setTimeout(() => {
     overlay.style.display = 'none';
   }, (DUR + 1.2) * 1000);
